@@ -1,7 +1,19 @@
 # Casting Agency API
 
+This project is the final project for my Udacity FullStack Developer Nanodegree.
+
+The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Admin within the company and are creating a system to simplify and streamline your process.
+
+This Application does not have a frontend implemented. It is a server only application at the moment. 
+
+## Project Motivation
+The Casting Agency Project models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Admin within the company and are creating a system to simplify and streamline your process. 
+
+
+This project is simply a workspace for practicing and showcasing different set of skills related with web development. These include data modelling, API design, authentication and authorization and cloud deployment.
+
 ## Capstone Project for Udacity's Full Stack Developer Nanodegree
-Heroku Link: https://ry-fsnd-capstone.herokuapp.com
+Heroku Link: https://paro-capstone.herokuapp.com
 
 While running locally: http://localhost:5000
 
@@ -63,7 +75,7 @@ Using the `--reload` flag will detect file changes and restart the server automa
 ## API Reference
 
 ## Getting Started
-Base URL: This application can be run locally. The hosted version is at `https://ry-fsnd-capstone.herokuapp.com`.
+Base URL: This application can be run locally. The hosted version is at `https://paro-capstone.herokuapp.com`.
 
 Authentication: This application requires authentication to perform various actions. All the endpoints require
 various permissions, except the root (or health) endpoint, that are passed via the `Bearer` token.
@@ -110,7 +122,7 @@ The API will return the following errors based on how the request fails:
    - is a public endpoint, requires no authentication
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com`
+   - `https://paro-capstone.herokuapp.com`
 
 <details>
 <summary>Sample Response</summary>
@@ -129,7 +141,7 @@ The API will return the following errors based on how the request fails:
    - requires `get:actors` permission
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors`
+   - `https://paro-capstone.herokuapp.com/actors`
 
 <details>
 <summary>Sample Response</summary>
@@ -166,7 +178,7 @@ The API will return the following errors based on how the request fails:
    - requires `get:actors-info` permission
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors/1`
+   - `https://paro-capstone.herokuapp.com/actors/1`
 
 <details>
 <summary>Sample Response</summary>
@@ -198,7 +210,7 @@ The API will return the following errors based on how the request fails:
    - date_of_birth: date, required
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors`
+   - `https://paro-capstone.herokuapp.com/actors`
    - Request Body
      ```
         {
@@ -231,7 +243,7 @@ The API will return the following errors based on how the request fails:
    - date_of_birth: date, optional
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors/5`
+   - `https://paro-capstone.herokuapp.com/actors/5`
    - Request Body
      ```
        {
@@ -262,7 +274,7 @@ The API will return the following errors based on how the request fails:
    - will also delete the mapping to the movie but will not delete the movie from the database
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors/5`
+   - `https://paro-capstone.herokuapp.com/actors/5`
 
 <details>
 <summary>Sample Response</summary>
@@ -282,7 +294,7 @@ The API will return the following errors based on how the request fails:
    - requires `get:movies` permission
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/movies`
+   - `https://paro-capstone.herokuapp.com/movies`
 
 <details>
 <summary>Sample Response</summary>
@@ -313,7 +325,7 @@ The API will return the following errors based on how the request fails:
    - requires `get:movies-info` permission
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/movies/1`
+   - `https://paro-capstone.herokuapp.com/movies/1`
 
 <details>
 <summary>Sample Response</summary>
@@ -353,7 +365,7 @@ The API will return the following errors based on how the request fails:
    - If not, the request will fail with code 422.
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/actors`
+   - `https://paro-capstone.herokuapp.com/actors`
    - Request Body
      ```
         {
@@ -394,7 +406,7 @@ The API will return the following errors based on how the request fails:
    - So, if you want to append new actors to a movie, pass the existing actors also in the request.
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/movies/3`
+   - `https://paro-capstone.herokuapp.com/movies/3`
    - Request Body
      ```
        {
@@ -426,7 +438,7 @@ The API will return the following errors based on how the request fails:
    - will not affect the actors present in the database
  
  - Sample Request
-   - `https://ry-fsnd-capstone.herokuapp.com/movies/3`
+   - `https://paro-capstone.herokuapp.com/movies/3`
 
 <details>
 <summary>Sample Response</summary>
@@ -451,3 +463,72 @@ python test.py
 
 Alternate way: Create the db `capstone_test` using PgAdmin and copy the contents of casting.sql and paste them
 in Query tool in PgAdmin and create the db table with records. Then, run the command `python test.py`.
+
+
+
+## Deployment
+This app is deployed on Heroku. For deployment, you need to:
+
+1. Install Heroku CLI and login to Heroku on the terminal
+
+2. create a [setup.sh](setup.sh) file and declare all your variables in the file
+
+3. Install gunicorn
+``` bash
+    pip install gunicorn
+```
+
+4. Create a [Procfile](Procfile) and add the line below. The Procfile instructs Heroku on what to do. Make sure that **your app** is housed in **[app.py](app.py)**
+``` bash
+    web: gunicorn app:app
+```
+
+5. Install the following requirements
+``` bash
+    pip install flask_script
+    pip install flask_migrate
+    pip install psycopg2-binary
+```       
+
+6. Freeze your requirements in the [requirements.txt](requirements.txt) file
+``` bash
+    pip freeze > requirements.txt
+```   
+
+7. Create Heroku app
+``` bash
+    heroku create name_of_your_app
+```
+        
+8. Add git remote for Heroku to local repository
+``` bash
+    git remote add heroku heroku_git_url
+``` 
+
+9. Add postgresql add on for our database
+``` bash
+    heroku addons:create heroku-postgresql:hobby-dev --app name_of_your_application
+```
+10. Add all the Variables in Heroku under settings
+``` bash
+    # This should already exist from the last step
+    DATABASE_URL
+    # Get these from Auth0
+    AUTH0_DOMAIN
+    ALGORITHMS
+    API_AUDIENCE
+```
+        
+10. Push any changes to your GitHub Repository
+
+11. Push to Heroku
+``` bash
+    git push heroku master
+```      
+
+12. Run Migrations to the Heroku database
+``` bash
+    heroku run python manage.py db upgrade --app name_of_your_application
+```
+
+Visit your Heroku app on the hosted URL!
